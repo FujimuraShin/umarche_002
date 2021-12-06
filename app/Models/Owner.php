@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Shop;
+use App\Models\Image;
 
 
 class Owner extends Model
@@ -20,5 +21,9 @@ class Owner extends Model
 
     public function shop(){
         return $this->hasOne(Shop::class);
+    }
+
+    public function image(){
+        return $this->hasManyOne(Image::class);
     }
 }

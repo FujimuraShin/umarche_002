@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\OwnersController;
 use App\Http\Controllers\Admin\ShopController;
+use App\Http\Controllers\Admin\ImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +26,9 @@ Route::get('/dashboard', function () {
 
 Route::resource('owners',OwnersController::class);
 
-Route::post('owners/store',[OwnersContoller::class,'index']);
+Route::post('owners/store',[OwnersController::class,'index']);
 
-Route::post('owners/update',[OwnersContoller::class,'update']);
+Route::post('owners/update',[OwnersController::class,'update']);
 
 Route::prefix('expired-owners')-> 
     group(function(){
@@ -55,4 +56,10 @@ Route::prefix('shop')->
 
     Route::post('shops/update/{shop}',[ShopController::class,'update'])->name('shops.update');
 
-require __DIR__.'/auth.php';
+    //Route::resource('images',ImageController::class);
+
+    Route::get('images/index',[ImageController::class,'index'])->name('images.index');
+    Route::get('images/create',[ImageController::class,'create'])->name('images.create');
+
+
+    require __DIR__.'/auth.php';
