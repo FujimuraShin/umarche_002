@@ -8,6 +8,7 @@ use App\Models\Image;
 use App\Models\Owner;
 use App\Http\Requests\UploadImageRequest;
 use App\Services\ImageService;
+use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
 {
@@ -51,5 +52,42 @@ class ImageController extends Controller
                 ->route('images.index')
                 ->with(['message'=>'商品画像を登録しました'
                 ,'status'=>'info']);
+    }
+
+    public function edit(){
+        $id=2;
+        $image=Image::findOrFail($id);
+
+        return view('images.edit',compact('image'));
+    }
+
+    public function update(Request $request,$id){
+
+        $image=Image::findOrFail($id);
+        $image->title=$request->title;
+
+        $image->save();
+
+        return redirect()->route('images.index',$image);
+    }
+
+    public function destroy($id)
+    {
+        
+        $image=Image::findOrFail($id);
+
+        $filePath='public/products/'.$image->filename;
+
+        if(Storage::exists($filePath)){
+            Storage::delete($filePath);
+        }
+        
+        Image::findOrFail($id)->delete();//ソフトデリート
+
+        return redirect()
+        ->route('images.index')
+        ->with(['message'=>'登録画像の削除しました',
+                'status'=>'alert',
+                 ]);
     }
 }
