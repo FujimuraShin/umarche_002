@@ -14,4 +14,4 @@ class SecondaryCategory extends Model
         return $this->belongsTo(PrimaryCategory::class);
     }
 }
-}
+

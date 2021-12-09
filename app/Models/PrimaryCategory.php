@@ -11,6 +11,6 @@ class PrimaryCategory extends Model
     use HasFactory;
 
     public function secondary(){
-        return $this->hasManyOne(SecondaryCategory::class);
+        return $this->hasMany(SecondaryCategory::class);
     }
 }
