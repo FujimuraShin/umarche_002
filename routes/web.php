@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\OwnersController;
 use App\Http\Controllers\Admin\ShopController;
 use App\Http\Controllers\Admin\ImageController;
+use App\Http\Controllers\Admin\ProductController;
 
 /*
 |--------------------------------------------------------------------------
